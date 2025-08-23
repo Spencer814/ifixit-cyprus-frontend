@@ -1,0 +1,65 @@
+<div class="app-container" [class.rtl]="isRTL">
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a class="logo" routerLink="/">
+          <div class="logo-icon"></div>
+          <div class="logo-text">
+            <span class="brand-accent">IFixIt</span> <span class="brand-main">Cyprus</span>
+          </div>
+        </a>
+      </div>
+      <nav class="nav">
+        <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          {{ 'common.home' | translate }}
+        </a>
+        <a routerLink="/about" class="nav-link" routerLinkActive="active">
+          {{ 'common.about' | translate }}
+        </a>
+        <a routerLink="/services" class="nav-link" routerLinkActive="active">
+          {{ 'common.services' | translate }}
+        </a>
+        <a routerLink="/contact" class="nav-link" routerLinkActive="active">
+          {{ 'common.contact' | translate }}
+        </a>
+      </nav>
+      <div class="header-actions">
+        <app-language-switcher></app-language-switcher>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-info">
+        <div class="footer-section">
+          <h3>IFixIt Cyprus</h3>
+          <p>{{ 'footer.tagline' | translate }}</p>
+        </div>
+        <div class="footer-section">
+          <h4>{{ 'common.contact' | translate }}</h4>
+          <p>📞 +357 25583225</p>
+          <p>✉️ info&#64;neacontractors.com</p>
+          <p>📍 Limassol, Cyprus</p>
+        </div>
+        <div class="footer-section">
+          <h4>{{ 'contact.hours' | translate }}</h4>
+          <p>08:00 - 13:00</p>
+          <p>15:15 - 18:00</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 IFixIt Cyprus. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#" class="footer-link">{{ 'footer.privacy' | translate }}</a>
+          <a href="#" class="footer-link">{{ 'footer.terms' | translate }}</a>
+          <a routerLink="/contact" class="footer-link">{{ 'footer.contact' | translate }}</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
