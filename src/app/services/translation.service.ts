@@ -31,7 +31,8 @@ export class TranslationService {
         submit: 'Υποβολή',
         loading: 'Φόρτωση...',
         error: 'Σφάλμα',
-        success: 'Επιτυχία'
+        success: 'Επιτυχία',
+        locationName: 'Λεμεσός, Κύπρος'
       },
       navigation: {
         findServices: 'Βρείτε Υπηρεσίες',
@@ -132,6 +133,7 @@ export class TranslationService {
         getInTouch: 'Ελάτε σε Επαφή',
         description: 'Στείλτε μας μήνυμα και θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατό.',
         location: 'Τοποθεσία',
+        locationName: 'Λεμεσός, Κύπρος',
         hours: 'Ωράριο',
         sendMessage: 'Στείλτε Μήνυμα',
         firstName: 'Όνομα',
@@ -163,7 +165,8 @@ export class TranslationService {
         submit: 'Submit',
         loading: 'Loading...',
         error: 'Error',
-        success: 'Success'
+        success: 'Success',
+        locationName: 'Limassol, Cyprus'
       },
       navigation: {
         findServices: 'Find Services',
@@ -264,6 +267,7 @@ export class TranslationService {
         getInTouch: 'Get In Touch',
         description: 'Send us a message and we will contact you as soon as possible.',
         location: 'Location',
+        locationName: 'Limassol, Cyprus',
         hours: 'Hours',
         sendMessage: 'Send Message',
         firstName: 'First Name',
@@ -295,7 +299,8 @@ export class TranslationService {
         submit: 'Отправить',
         loading: 'Загрузка...',
         error: 'Ошибка',
-        success: 'Успех'
+        success: 'Успех',
+        locationName: 'Лимассол, Кипр'
       },
       navigation: {
         findServices: 'Найти Услуги',
@@ -394,6 +399,7 @@ export class TranslationService {
         getInTouch: 'Связаться',
         description: 'Отправьте нам сообщение, и мы свяжемся с вами как можно скорее.',
         location: 'Местоположение',
+        locationName: 'Лимассол, Кипр',
         hours: 'Часы Работы',
         sendMessage: 'Отправить Сообщение',
         firstName: 'Имя',
@@ -425,7 +431,8 @@ export class TranslationService {
         submit: 'שלח',
         loading: 'טוען...',
         error: 'שגיאה',
-        success: 'הצלחה'
+        success: 'הצלחה',
+        locationName: 'לימסול, קפריסין'
       },
       navigation: {
         findServices: 'מצא שירותים',
@@ -524,6 +531,7 @@ export class TranslationService {
         getInTouch: 'יצירת קשר',
         description: 'שלחו לנו הודעה ונחזור אליכם בהקדם האפשרי.',
         location: 'מיקום',
+        locationName: 'לימסול, קפריסין',
         hours: 'שעות פעילות',
         sendMessage: 'שלח הודעה',
         firstName: 'שם פרטי',

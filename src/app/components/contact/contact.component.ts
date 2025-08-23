@@ -46,7 +46,7 @@ import { Subscription } from 'rxjs';
                   <div class="contact-icon">📍</div>
                   <div class="contact-text">
                     <h3>{{ 'contact.location' | translate }}</h3>
-                    <p>Limassol, Cyprus</p>
+                    <p>{{ 'contact.locationName' | translate }}</p>
                   </div>
                 </div>
                 
