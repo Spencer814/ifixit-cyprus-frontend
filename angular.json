@@ -51,7 +51,8 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/ifixit-cyprus-frontend/"   // 👈 ADD THIS LINE
             },
             "development": {
               "optimization": false,
@@ -97,6 +98,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
