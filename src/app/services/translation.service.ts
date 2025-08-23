@@ -21,11 +21,12 @@ export class TranslationService {
         home: 'Αρχική',
         services: 'Υπηρεσίες',
         contact: 'Επικοινωνία',
+        allRightsReserved: 'Όλα τα δικαιώματα κατοχυρωμένα.',
         about: 'Σχετικά',
         search: 'Αναζήτηση',
         location: 'Τοποθεσία',
         phone: 'Τηλέφωνο',
-        email: 'Email',
+        email: 'Ηλεκτρονικό Ταχυδρομείο',
         name: 'Όνομα',
         submit: 'Υποβολή',
         loading: 'Φόρτωση...',
@@ -49,7 +50,8 @@ export class TranslationService {
         fastService: 'Γρήγορη Εξυπηρέτηση',
         fastDesc: 'Άμεση ανταπόκριση και γρήγορη ολοκλήρωση των εργασιών σας.',
         trustedPros: 'Έμπιστοι Επαγγελματίες',
-        trustedDesc: 'Όλοι οι συνεργάτες μας είναι προσεκτικά επιλεγμένοι και αξιόπιστοι.'
+        trustedDesc: 'Όλοι οι συνεργάτες μας είναι προσεκτικά επιλεγμένοι και αξιόπιστοι.',
+        ourTeam: 'Η Ομάδα Μας'
       },
       services: {
         plumbing: 'Υδραυλικές Εργασίες',
@@ -120,7 +122,8 @@ export class TranslationService {
         satisfactionDesc: 'Η ικανοποίηση των πελατών μας είναι η πρώτη μας προτεραιότητα σε κάθε έργο που αναλαμβάνουμε.',
         projects: 'Έργα',
         experience: 'Χρόνια Εμπειρίας',
-        support: 'Υποστήριξη'
+        support: 'Υποστήριξη',
+        ourTeam: 'Η Ομάδα Μας'
       },
       contact: {
         title: 'Επικοινωνήστε Μαζί μας',
@@ -178,7 +181,8 @@ export class TranslationService {
         fastService: 'Fast Service',
         fastDesc: 'Quick response and fast completion of your projects.',
         trustedPros: 'Trusted Professionals',
-        trustedDesc: 'All our partners are carefully selected and reliable.'
+        trustedDesc: 'All our partners are carefully selected and reliable.',
+        ourTeam: 'Our Team'
       },
       services: {
         plumbing: 'Plumbing',
@@ -233,7 +237,8 @@ export class TranslationService {
         tagline: 'Connecting you with trusted professionals',
         privacy: 'Privacy Policy',
         terms: 'Terms of Service',
-        contact: 'Contact Us'
+        contact: 'Contact Us',
+        allRightsReserved: 'All rights reserved.'
       },
       about: {
         title: 'About Us',
@@ -249,7 +254,8 @@ export class TranslationService {
         satisfactionDesc: 'Customer satisfaction is our top priority in every project we undertake.',
         projects: 'Projects',
         experience: 'Years Experience',
-        support: 'Support'
+        support: 'Support',
+        ourTeam: 'Our Team'
       },
       contact: {
         title: 'Contact Us',
@@ -283,7 +289,7 @@ export class TranslationService {
         search: 'Поиск',
         location: 'Местоположение',
         phone: 'Телефон',
-        email: 'Email',
+        email: 'Электронная Почта',
         name: 'Имя',
         submit: 'Отправить',
         loading: 'Загрузка...',
@@ -307,7 +313,8 @@ export class TranslationService {
         fastService: 'Быстрое Обслуживание',
         fastDesc: 'Быстрое реагирование и оперативное выполнение ваших задач.',
         trustedPros: 'Надежные Специалисты',
-        trustedDesc: 'Все наши партнеры проверены и имеют необходимые лицензии для работы на Кипре.'
+        trustedDesc: 'Все наши партнеры проверены и имеют необходимые лицензии для работы на Кипре.',
+        ourTeam: 'Наша Команда'
       },
       services: {
         title: 'Наши Услуги',
@@ -360,7 +367,8 @@ export class TranslationService {
         tagline: 'Связываем вас с надежными специалистами',
         privacy: 'Политика Конфиденциальности',
         terms: 'Условия Обслуживания',
-        contact: 'Связаться с Нами'
+        contact: 'Связаться с Нами',
+        allRightsReserved: 'Все права защищены.'
       },
       about: {
         title: 'О Нас',
@@ -376,7 +384,8 @@ export class TranslationService {
         satisfactionDesc: 'Удовлетворение клиентов - наш главный приоритет в каждом проекте, который мы выполняем.',
         projects: 'Проектов',
         experience: 'Лет Опыта',
-        support: 'Поддержка'
+        support: 'Поддержка',
+        ourTeam: 'Наша Команда'
       },
       contact: {
         title: 'Свяжитесь с Нами',
@@ -434,7 +443,8 @@ export class TranslationService {
         fastService: 'שירות מהיר',
         fastDesc: 'מענה מהיר והשלמת עבודות במהירות.',
         trustedPros: 'מקצועיים מהימנים',
-        trustedDesc: 'כל השותפים שלנו נבדקו ויש להם הרישיונות הנדרשים לעבודה בקפריסין.'
+        trustedDesc: 'כל השותפים שלנו נבדקו ויש להם הרישיונות הנדרשים לעבודה בקפריסין.',
+        ourTeam: 'הצוות שלנו'
       },
       services: {
         title: 'השירותים שלנו',
@@ -487,7 +497,8 @@ export class TranslationService {
         tagline: 'מחברים אתכם למקצועיים מהימנים',
         privacy: 'מדיניות פרטיות',
         terms: 'תנאי שירות',
-        contact: 'צרו קשר'
+        contact: 'צרו קשר',
+        allRightsReserved: 'כל הזכויות שמורות.'
       },
       about: {
         title: 'אודותינו',
@@ -503,7 +514,8 @@ export class TranslationService {
         satisfactionDesc: 'שביעות רצון הלקוחות היא העדיפות העליונה שלנו בכל פרויקט שאנו מבצעים.',
         projects: 'פרויקטים',
         experience: 'שנות ניסיון',
-        support: 'תמיכה'
+        support: 'תמיכה',
+        ourTeam: 'הצוות שלנו'
       },
       contact: {
         title: 'צרו קשר',

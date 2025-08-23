@@ -27,12 +27,7 @@ import { Subscription } from 'rxjs';
         <div class="feature-grid">
           <div class="feature-item">
             <div class="feature-image">
-              <div class="image-placeholder quality-image">
-                <div class="placeholder-content">
-                  <div class="feature-icon">🏆</div>
-                  <span class="placeholder-text">Quality Work Image</span>
-                </div>
-              </div>
+              <img src="assets/images/quality-work.svg" alt="{{ 'home.qualityWork' | translate }}" class="feature-img">
             </div>
             <div class="feature-text">
               <h3>{{ 'home.qualityWork' | translate }}</h3>
@@ -41,12 +36,7 @@ import { Subscription } from 'rxjs';
           </div>
           <div class="feature-item">
             <div class="feature-image">
-              <div class="image-placeholder service-image">
-                <div class="placeholder-content">
-                  <div class="feature-icon">⚡</div>
-                  <span class="placeholder-text">Fast Service Image</span>
-                </div>
-              </div>
+              <img src="assets/images/fast-service.svg" alt="{{ 'home.fastService' | translate }}" class="feature-img">
             </div>
             <div class="feature-text">
               <h3>{{ 'home.fastService' | translate }}</h3>
@@ -55,12 +45,7 @@ import { Subscription } from 'rxjs';
           </div>
           <div class="feature-item">
             <div class="feature-image">
-              <div class="image-placeholder trust-image">
-                <div class="placeholder-content">
-                  <div class="feature-icon">🔒</div>
-                  <span class="placeholder-text">Trusted Professionals Image</span>
-                </div>
-              </div>
+              <img src="assets/images/trusted-professionals.svg" alt="{{ 'home.trustedPros' | translate }}" class="feature-img">
             </div>
             <div class="feature-text">
               <h3>{{ 'home.trustedPros' | translate }}</h3>
@@ -76,20 +61,7 @@ import { Subscription } from 'rxjs';
         <div class="showcase-grid">
           <div class="showcase-item">
             <div class="showcase-image">
-              <div class="image-placeholder project-image">
-                <div class="placeholder-content">
-                  <span class="placeholder-text">Recent Project</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="showcase-item">
-            <div class="showcase-image">
-              <div class="image-placeholder team-image">
-                <div class="placeholder-content">
-                  <span class="placeholder-text">Our Team</span>
-                </div>
-              </div>
+              <img src="assets/images/our-team.svg" alt="{{ 'home.ourTeam' | translate }}" class="team-img">
             </div>
           </div>
         </div>
@@ -219,40 +191,16 @@ import { Subscription } from 'rxjs';
       margin-bottom: 1.5rem;
     }
 
-    .image-placeholder {
+    .feature-img {
       width: 100%;
       height: 200px;
       border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
+      object-fit: cover;
 
       &:hover {
         transform: translateY(-4px);
-      }
-
-      &.quality-image {
-        background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-      }
-
-      &.service-image {
-        background: linear-gradient(135deg, #fef3c7, #fde68a);
-      }
-
-      &.trust-image {
-        background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-      }
-
-      &.project-image {
-        background: linear-gradient(135deg, #131836, #1a1f4a);
-      }
-
-      &.team-image {
-        background: linear-gradient(135deg, #b69d3f, #9a8235);
       }
     }
 
@@ -320,8 +268,17 @@ import { Subscription } from 'rxjs';
       max-width: 500px;
     }
 
-    .showcase .image-placeholder {
+    .team-img {
+      width: 100%;
       height: 300px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+      object-fit: cover;
+
+      &:hover {
+        transform: translateY(-4px);
+      }
     }
 
     .project-image .placeholder-text,

@@ -26,12 +26,7 @@ import { Subscription } from 'rxjs';
               <p>{{ 'about.description2' | translate }}</p>
             </div>
             <div class="about-image">
-              <div class="image-placeholder team-image">
-                <div class="placeholder-content">
-                  <div class="team-icon">👷‍♂️</div>
-                  <span class="placeholder-text">Our Professional Team</span>
-                </div>
-              </div>
+              <img src="assets/images/our-team.svg" alt="{{ 'about.ourTeam' | translate }}" class="about-team-img">
             </div>
           </div>
           
@@ -133,24 +128,16 @@ import { Subscription } from 'rxjs';
       height: 400px;
     }
 
-    .image-placeholder {
+    .about-team-img {
       width: 100%;
       height: 100%;
       border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
+      object-fit: cover;
 
       &:hover {
         transform: translateY(-4px);
-      }
-
-      &.team-image {
-        background: linear-gradient(135deg, #131836, #1a1f4a);
       }
     }
 
