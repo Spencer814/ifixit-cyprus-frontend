@@ -106,7 +106,8 @@ export class TranslationService {
         tagline: 'Σας συνδέουμε με αξιόπιστους επαγγελματίες',
         privacy: 'Πολιτική Απορρήτου',
         terms: 'Όροι Χρήσης',
-        contact: 'Επικοινωνήστε μαζί μας'
+        contact: 'Επικοινωνήστε μαζί μας',
+        allRightsReserved: 'Όλα τα δικαιώματα κατοχυρωμένα.'
       },
       about: {
         title: 'Σχετικά με εμάς',
