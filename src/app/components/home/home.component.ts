@@ -27,7 +27,7 @@ import { Subscription } from 'rxjs';
         <div class="feature-grid">
           <div class="feature-item">
             <div class="feature-image">
-              <img src="assets/images/quality-work.svg" alt="{{ 'home.qualityWork' | translate }}" class="feature-img">
+              <img [src]="'assets/images/quality-work-' + this.getCurrentLanguage() + '.svg'" alt="{{ 'home.qualityWork' | translate }}" class="feature-img">
             </div>
             <div class="feature-text">
               <h3>{{ 'home.qualityWork' | translate }}</h3>
@@ -36,7 +36,7 @@ import { Subscription } from 'rxjs';
           </div>
           <div class="feature-item">
             <div class="feature-image">
-              <img src="assets/images/fast-service.svg" alt="{{ 'home.fastService' | translate }}" class="feature-img">
+              <img [src]="'assets/images/fast-service-' + this.getCurrentLanguage() + '.svg'" alt="{{ 'home.fastService' | translate }}" class="feature-img">
             </div>
             <div class="feature-text">
               <h3>{{ 'home.fastService' | translate }}</h3>
@@ -45,7 +45,7 @@ import { Subscription } from 'rxjs';
           </div>
           <div class="feature-item">
             <div class="feature-image">
-              <img src="assets/images/trusted-professionals.svg" alt="{{ 'home.trustedPros' | translate }}" class="feature-img">
+              <img [src]="'assets/images/trusted-professionals-' + this.getCurrentLanguage() + '.svg'" alt="{{ 'home.trustedPros' | translate }}" class="feature-img">
             </div>
             <div class="feature-text">
               <h3>{{ 'home.trustedPros' | translate }}</h3>
@@ -56,17 +56,6 @@ import { Subscription } from 'rxjs';
       </div>
     </section>
 
-    <section class="showcase">
-      <div class="showcase-content">
-        <div class="showcase-grid">
-          <div class="showcase-item">
-            <div class="showcase-image">
-              <img src="assets/images/our-team.svg" alt="{{ 'home.ourTeam' | translate }}" class="team-img">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   `,
   styles: [`
     .hero {
@@ -240,46 +229,6 @@ import { Subscription } from 'rxjs';
       font-size: 1rem;
     }
 
-    .showcase {
-      padding: 4rem 0;
-      background: #f8fafc;
-    }
-
-    .showcase-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .showcase-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
-    }
-
-    .showcase-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .showcase-image {
-      width: 100%;
-      max-width: 500px;
-    }
-
-    .team-img {
-      width: 100%;
-      height: 300px;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease;
-      object-fit: cover;
-
-      &:hover {
-        transform: translateY(-4px);
-      }
-    }
 
     .project-image .placeholder-text,
     .team-image .placeholder-text {
@@ -347,5 +296,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
+  }
+
+  getCurrentLanguage(): string {
+    return this.translationService.getCurrentLanguage();
   }
 }
