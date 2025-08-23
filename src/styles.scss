@@ -17,24 +17,24 @@ html[dir="ltr"] {
 
 /* Font support for different languages */
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
                'Noto Sans', 'Noto Sans Greek', 'Noto Sans Hebrew', Arial, sans-serif;
 }
 
-/* Hebrew-specific font stack */
-html[lang="he"] body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-               'Noto Sans Hebrew', 'Hebrew UI', Arial, sans-serif;
-}
+// /* Hebrew-specific font stack */
+// html[lang="he"] body {
+//   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+//                'Noto Sans Hebrew', 'Hebrew UI', Arial, sans-serif;
+// }
 
 /* Greek-specific font stack */
 html[lang="el"] body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
                'Noto Sans Greek', Georgia, Times, serif;
 }
 
-/* Russian-specific font stack */
-html[lang="ru"] body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-               'Noto Sans', Arial, sans-serif;
-}
+// /* Russian-specific font stack */
+// html[lang="ru"] body {
+//   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+//                'Noto Sans', Arial, sans-serif;
+// }

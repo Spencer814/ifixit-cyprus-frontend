@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   imports: [CommonModule],
   template: `
     <div class="language-switcher" [class.rtl]="isRTL">
-      <button 
+      <button
         class="language-toggle"
         (click)="toggleDropdown()"
         [attr.aria-expanded]="isDropdownOpen"
@@ -36,9 +36,9 @@ import { Subscription } from 'rxjs';
     </div>
 
     <!-- Overlay to close dropdown when clicking outside -->
-    <div 
-      *ngIf="isDropdownOpen" 
-      class="dropdown-overlay" 
+    <div
+      *ngIf="isDropdownOpen"
+      class="dropdown-overlay"
       (click)="closeDropdown()"
     ></div>
   `,
@@ -195,10 +195,11 @@ import { Subscription } from 'rxjs';
 })
 export class LanguageSwitcherComponent implements OnInit, OnDestroy {
   currentLanguage: SupportedLanguage = 'el';
-  availableLanguages: SupportedLanguage[] = ['el', 'en', 'ru', 'he'];
+  // availableLanguages: SupportedLanguage[] = ['el', 'en', 'ru', 'he'];
+  availableLanguages: SupportedLanguage[] = ['el', 'en'];
   isDropdownOpen = false;
   isRTL = false;
-  
+
   private subscription?: Subscription;
 
   constructor(private translationService: TranslationService) {}
