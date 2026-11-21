@@ -1,65 +1,127 @@
-<div class="app-container" [class.rtl]="isRTL">
-  <header class="header">
-    <div class="header-content">
-      <div class="logo-section">
-        <a class="logo" routerLink="/">
-          <div class="logo-icon"></div>
-          <div class="logo-text">
-            <span class="brand-accent">IFixIt</span> <span class="brand-main">Cyprus</span>
-          </div>
-        </a>
-      </div>
-      <nav class="nav">
-        <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          {{ 'common.home' | translate }}
-        </a>
-        <a routerLink="/about" class="nav-link" routerLinkActive="active">
-          {{ 'common.about' | translate }}
-        </a>
-        <a routerLink="/services" class="nav-link" routerLinkActive="active">
-          {{ 'common.services' | translate }}
-        </a>
-        <a routerLink="/contact" class="nav-link" routerLinkActive="active">
-          {{ 'common.contact' | translate }}
-        </a>
-      </nav>
-      <div class="header-actions">
-        <app-language-switcher></app-language-switcher>
-      </div>
-    </div>
-  </header>
+<a class="skip-link" href="#main" (click)="$event.preventDefault(); main.focus()">{{ 'common.skipToContent' | translate }}</a>
 
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-info">
-        <div class="footer-section">
-          <h3>IFixIt Cyprus</h3>
-          <p>{{ 'footer.tagline' | translate }}</p>
-        </div>
-        <div class="footer-section">
-          <h4>{{ 'common.contact' | translate }}</h4>
-          <p>📞 +357 25583225</p>
-          <p>✉️ info&#64;neacontractors.com</p>
-          <p>📍 {{ 'common.locationName' | translate }}</p>
-        </div>
-        <div class="footer-section">
-          <h4>{{ 'contact.hours' | translate }}</h4>
-          <p>08:00 - 13:00</p>
-          <p>15:15 - 18:00</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 IFixIt Cyprus. {{ 'footer.allRightsReserved' | translate }}</p>
-        <div class="footer-links">
-          <a href="#" class="footer-link">{{ 'footer.privacy' | translate }}</a>
-          <a href="#" class="footer-link">{{ 'footer.terms' | translate }}</a>
-          <a routerLink="/contact" class="footer-link">{{ 'footer.contact' | translate }}</a>
-        </div>
-      </div>
+<header class="site-header">
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <ul class="topbar__list">
+        <li class="topbar__email">
+          <a [href]="'mailto:' + contact.email">
+            <app-icon name="mail" />
+            <span class="sr-only">{{ 'common.email' | translate }}: </span>{{ contact.email }}
+          </a>
+        </li>
+        <li class="topbar__hours">
+          <app-icon name="clock" />
+          <span class="sr-only">{{ 'common.hours' | translate }}: </span>
+          @for (slot of contact.hours; track slot.from; let last = $last) {
+            <span>{{ slot.from }}–{{ slot.to }}</span>@if (!last) {<span aria-hidden="true" class="topbar__sep">|</span>}
+          }
+        </li>
+        <li class="topbar__phone">
+          <a [href]="contact.phoneHref">
+            <app-icon name="phone" />
+            <span class="sr-only">{{ 'common.phone' | translate }}: </span>{{ contact.phoneDisplay }}
+          </a>
+        </li>
+      </ul>
+      <app-language-switcher />
     </div>
-  </footer>
-</div>
+  </div>
+
+  <div class="container masthead">
+    <a class="brand" routerLink="/">
+      <img class="brand__mark" src="favicon.svg" alt="" width="44" height="44">
+      <span class="brand__name">IFixIt <span class="brand__accent">Cyprus</span></span>
+    </a>
+
+    <button type="button" class="menu-btn" aria-controls="site-nav"
+            [attr.aria-expanded]="menuOpen" (click)="toggleMenu()">
+      <app-icon [name]="menuOpen ? 'close' : 'menu'" />
+      <span>{{ 'common.menu' | translate }}</span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" [class.is-open]="menuOpen" [attr.aria-label]="'common.mainNav' | translate">
+      <ul class="site-nav__list">
+        @for (item of navItems; track item.path) {
+          <li>
+            <a class="site-nav__link" [routerLink]="item.path" routerLinkActive="is-active"
+               ariaCurrentWhenActive="page" [routerLinkActiveOptions]="{ exact: item.exact }">
+              {{ item.key | translate }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <a class="header-phone" [href]="contact.phoneHref">
+      <span class="header-phone__icon"><app-icon name="phone" /></span>
+      <span class="header-phone__text">
+        <span class="header-phone__label">{{ 'common.callUs' | translate }}</span>
+        <span class="header-phone__number">{{ contact.phoneDisplay }}</span>
+      </span>
+    </a>
+  </div>
+</header>
+
+<main id="main" #main tabindex="-1">
+  <router-outlet />
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="brand brand--on-dark" routerLink="/">
+        <img class="brand__mark" src="favicon.svg" alt="" width="44" height="44">
+        <span class="brand__name">IFixIt <span class="brand__accent">Cyprus</span></span>
+      </a>
+      <p>{{ 'footer.tagline' | translate }}</p>
+    </div>
+
+    <div>
+      <h2 class="site-footer__heading">{{ 'footer.pages' | translate }}</h2>
+      <ul class="site-footer__links">
+        @for (item of navItems; track item.path) {
+          <li><a [routerLink]="item.path">{{ item.key | translate }}</a></li>
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="site-footer__heading">{{ 'common.services' | translate }}</h2>
+      <ul class="site-footer__links">
+        @for (id of serviceLinks; track id) {
+          <li><a routerLink="/services" [fragment]="id">{{ 'services.' + id | translate }}</a></li>
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="site-footer__heading">{{ 'common.contact' | translate }}</h2>
+      <ul class="site-footer__links site-footer__contact">
+        <li>
+          <a [href]="contact.phoneHref"><app-icon name="phone" />
+            <span class="sr-only">{{ 'common.phone' | translate }}: </span>{{ contact.phoneDisplay }}</a>
+        </li>
+        <li>
+          <a [href]="'mailto:' + contact.email"><app-icon name="mail" />
+            <span class="sr-only">{{ 'common.email' | translate }}: </span>{{ contact.email }}</a>
+        </li>
+        <li>
+          <app-icon name="clock" />
+          <span><span class="sr-only">{{ 'common.hours' | translate }}: </span>
+            @for (slot of contact.hours; track slot.from) {
+              <span class="site-footer__slot">{{ slot.from }}–{{ slot.to }}</span>
+            }
+          </span>
+        </li>
+        <li><app-icon name="pin" /> {{ 'common.locationName' | translate }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <div class="container">
+      <p>&copy; {{ year }} IFixIt Cyprus. {{ 'footer.allRightsReserved' | translate }}</p>
+    </div>
+  </div>
+</footer>

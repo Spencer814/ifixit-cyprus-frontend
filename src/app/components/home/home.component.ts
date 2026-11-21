@@ -1,304 +1,130 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslationService } from '../../services/translation.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
-import { Subscription } from 'rxjs';
+import { IconComponent } from '../icon/icon.component';
+import { ContactBandComponent } from '../contact-band/contact-band.component';
+import { CONTACT, HERO_IMAGE } from '../../brand';
+import { SERVICE_IDS } from '../../services.data';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, TranslatePipe],
+  imports: [RouterLink, TranslatePipe, IconComponent, ContactBandComponent],
   template: `
     <section class="hero">
-      <div class="hero-content">
-        <h1>{{ 'home.title' | translate }}</h1>
-        <p class="hero-subtitle">{{ 'home.subtitle' | translate }}</p>
-        
-        <div class="cta-section">
-          <a routerLink="/services" class="cta-btn primary">{{ 'home.viewServices' | translate }}</a>
-          <a routerLink="/contact" class="cta-btn secondary">{{ 'home.getQuote' | translate }}</a>
+      <div class="hero__panel on-dark">
+        <div class="hero__content">
+          <p class="eyebrow">{{ 'common.locationName' | translate }}</p>
+          <h1 class="hero__title">
+            <span class="hero__brand">IFixIt Cyprus</span>
+            <span class="hero__display">{{ 'home.display' | translate }}</span>
+          </h1>
+          <p class="hero__lead">{{ 'home.subtitle' | translate }}</p>
+          <div class="hero__actions">
+            <a class="btn btn--gold" [href]="contact.phoneHref">
+              <app-icon name="phone" />
+              <span>{{ 'common.callUs' | translate }}<span class="hero__num">: {{ contact.phoneDisplay }}</span></span>
+            </a>
+            <a class="btn btn--ghost-light" routerLink="/services">{{ 'home.viewServices' | translate }}</a>
+          </div>
+          <p class="hero__hours">
+            <app-icon name="clock" />
+            <span class="sr-only">{{ 'common.hours' | translate }}: </span>
+            @for (slot of contact.hours; track slot.from; let last = $last) {
+              <span>{{ slot.from }}–{{ slot.to }}</span>@if (!last) {<span aria-hidden="true"> | </span>}
+            }
+          </p>
         </div>
+      </div>
+      <div class="hero__media" [class.hero__media--photo]="hero.isPhoto">
+        <img [src]="hero.src" [alt]="hero.altKey ? (hero.altKey | translate) : ''" width="800" height="640">
       </div>
     </section>
 
-    <section class="features">
-      <div class="features-content">
-        <div class="feature-grid">
-          <div class="feature-item">
-            <div class="feature-image">
-              <img [src]="'assets/images/quality-work-' + this.getCurrentLanguage() + '.svg'" alt="{{ 'home.qualityWork' | translate }}" class="feature-img">
-            </div>
-            <div class="feature-text">
-              <h3>{{ 'home.qualityWork' | translate }}</h3>
-              <p>{{ 'home.qualityDesc' | translate }}</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-image">
-              <img [src]="'assets/images/fast-service-' + this.getCurrentLanguage() + '.svg'" alt="{{ 'home.fastService' | translate }}" class="feature-img">
-            </div>
-            <div class="feature-text">
-              <h3>{{ 'home.fastService' | translate }}</h3>
-              <p>{{ 'home.fastDesc' | translate }}</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-image">
-              <img [src]="'assets/images/trusted-professionals-' + this.getCurrentLanguage() + '.svg'" alt="{{ 'home.trustedPros' | translate }}" class="feature-img">
-            </div>
-            <div class="feature-text">
-              <h3>{{ 'home.trustedPros' | translate }}</h3>
-              <p>{{ 'home.trustedDesc' | translate }}</p>
-            </div>
-          </div>
+    <section class="section" aria-labelledby="intro-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">IFixIt Cyprus</p>
+          <h2 id="intro-title">{{ 'home.introTitle' | translate }}</h2>
+          <p>{{ 'home.introText' | translate }}</p>
         </div>
+        <ul class="grid grid--3 plain-list">
+          @for (f of features; track f.key) {
+            <li class="card">
+              <span class="card__icon"><app-icon [name]="f.icon" /></span>
+              <h3>{{ 'home.' + f.key | translate }}</h3>
+              <p>{{ 'home.' + f.desc | translate }}</p>
+            </li>
+          }
+        </ul>
       </div>
     </section>
 
+    <section class="section section--soft" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section__head section__head--row">
+          <h2 id="services-title">{{ 'home.servicesTitle' | translate }}</h2>
+          <a class="text-link" routerLink="/services">{{ 'home.allServices' | translate }} <app-icon name="arrow" /></a>
+        </div>
+        <ul class="grid grid--3 plain-list">
+          @for (id of services; track id) {
+            <li>
+              <a class="service-tile" routerLink="/services" [fragment]="id">
+                <span class="service-tile__icon"><app-icon [name]="id" /></span>
+                <span>
+                  <span class="service-tile__title">{{ 'services.' + id | translate }}</span>
+                  <span class="service-tile__desc">{{ 'services.' + id + 'Desc' | translate }}</span>
+                </span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    </section>
+
+    <app-contact-band titleKey="home.ctaTitle" textKey="home.ctaText" />
   `,
   styles: [`
-    .hero {
-      background: linear-gradient(135deg, #131836, #1a1f4a);
-      color: white;
-      padding: 8rem 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
+    .hero { display: grid; background: var(--navy); }
+    .hero__panel { display: flex; align-items: center; padding: 3.5rem 1.25rem; color: var(--muted-on-dark); }
+    .hero__content { width: 100%; max-width: 600px; }
+    .hero__title { margin: 0 0 1.25rem; color: #fff; }
+    .hero__brand { display: block; font-size: clamp(1.75rem, 3.2vw, 2.6rem); font-weight: 700; letter-spacing: .01em; }
+    .hero__display {
+      display: block; margin-top: .35rem; font-size: clamp(2.3rem, 5.2vw, 4.4rem); line-height: 1.08;
+      font-weight: 700; text-transform: uppercase; letter-spacing: .02em;
+      color: var(--navy); -webkit-text-stroke: 3px var(--gold); paint-order: stroke fill;
     }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, rgba(182, 157, 63, 0.1) 0%, transparent 50%);
-      z-index: 1;
+    @supports not (-webkit-text-stroke: 1px black) { .hero__display { color: var(--gold); } }
+    .hero__lead { font-size: 1.0625rem; max-width: 34rem; margin-bottom: 2rem; }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 1.75rem; }
+    .hero__hours { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; margin: 0; font-size: .875rem; app-icon { color: var(--gold); } }
+    .hero__media { min-height: 260px; background: var(--gold-soft); overflow: hidden; }
+    .hero__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    @media (min-width: 1024px) {
+      .hero { grid-template-columns: 1fr 1fr; min-height: 560px; }
+      .hero__panel { padding: 4.5rem 3rem 4.5rem max(2rem, calc((100vw - var(--container)) / 2 + 2rem)); }
     }
-
-    .hero-content {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 2;
-      width: 100%;
+    @media (max-width: 479px) { .hero__num { display: none; } .hero__actions .btn { flex: 1 1 100%; } }
+    .plain-list { list-style: none; }
+    .service-tile {
+      display: flex; gap: 1rem; height: 100%; padding: 1.4rem; background: #fff; text-decoration: none;
+      border: 1px solid var(--line); border-radius: var(--radius); transition: border-color .2s, box-shadow .2s;
+      &:hover { border-color: var(--gold); box-shadow: 0 6px 20px rgba(19,24,54,.08); }
     }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: bold;
-      margin-bottom: 2rem;
-      color: #b69d3f;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-      line-height: 1.2;
-    }
-
-    .hero-subtitle {
-      font-size: 1.4rem;
-      margin-bottom: 3rem;
-      color: #e2e8f0;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-    }
-
-    .cta-section {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .cta-btn {
-      padding: 1.2rem 2.5rem;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: inline-block;
-      cursor: pointer;
-      
-      &.primary {
-        background: #b69d3f;
-        color: white;
-        
-        &:hover {
-          background: #9a8235;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(182, 157, 63, 0.3);
-        }
-      }
-      
-      &.secondary {
-        background: transparent;
-        color: white;
-        border: 2px solid white;
-        
-        &:hover {
-          background: white;
-          color: #131836;
-          transform: translateY(-2px);
-        }
-      }
-    }
-
-    .features {
-      padding: 6rem 0;
-      background: white;
-    }
-
-    .features-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 3rem;
-    }
-
-    .feature-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-    }
-
-    .feature-image {
-      width: 100%;
-      max-width: 300px;
-      margin-bottom: 1.5rem;
-    }
-
-    .feature-img {
-      width: 100%;
-      height: 200px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-      object-fit: cover;
-
-      &:hover {
-        transform: translateY(-4px);
-      }
-    }
-
-    .placeholder-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      text-align: center;
-    }
-
-    .placeholder-text {
-      font-size: 0.9rem;
-      color: #64748b;
-      font-weight: 500;
-    }
-
-    .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .feature-text {
-      text-align: center;
-    }
-
-    .feature-item h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #131836;
-      margin-bottom: 1rem;
-    }
-
-    .feature-item p {
-      color: #64748b;
-      line-height: 1.7;
-      font-size: 1rem;
-    }
-
-
-    .project-image .placeholder-text,
-    .team-image .placeholder-text {
-      color: white;
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        padding: 6rem 0;
-        min-height: 60vh;
-      }
-      
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-      
-      .hero-subtitle {
-        font-size: 1.2rem;
-      }
-      
-      .cta-section {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .cta-btn {
-        width: 100%;
-        max-width: 300px;
-        text-align: center;
-      }
-      
-      .feature-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-      
-      .hero-subtitle {
-        font-size: 1.1rem;
-      }
-      
-      .cta-btn {
-        padding: 1rem 2rem;
-        font-size: 1rem;
-      }
-    }
+    .service-tile__icon { flex-shrink: 0; display: grid; place-items: center; width: 48px; height: 48px;
+      border-radius: 50%; background: var(--gold-soft); color: var(--gold-ink); font-size: 1.4rem; }
+    .service-tile__title { display: block; font-weight: 600; color: var(--ink); margin-bottom: .25rem; }
+    .service-tile__desc { display: block; font-size: .9rem; color: var(--body); line-height: 1.55; }
   `]
 })
-export class HomeComponent implements OnInit, OnDestroy {
-  isRTL = false;
-  private subscription?: Subscription;
-
-  constructor(private translationService: TranslationService) {}
-
-  ngOnInit(): void {
-    this.subscription = this.translationService.currentLanguage$.subscribe(() => {
-      this.isRTL = this.translationService.isRTL();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
-  }
-
-  getCurrentLanguage(): string {
-    return this.translationService.getCurrentLanguage();
-  }
+export class HomeComponent {
+  readonly contact = CONTACT;
+  readonly hero = HERO_IMAGE;
+  readonly services = SERVICE_IDS;
+  readonly features = [
+    { key: 'qualityWork', desc: 'qualityDesc', icon: 'quality' },
+    { key: 'fastService', desc: 'fastDesc', icon: 'fast' },
+    { key: 'trustedPros', desc: 'trustedDesc', icon: 'trusted' },
+  ];
 }

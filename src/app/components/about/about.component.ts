@@ -1,289 +1,102 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TranslationService } from '../../services/translation.service';
+import { Component } from '@angular/core';
 import { TranslatePipe } from '../../pipes/translate.pipe';
-import { Subscription } from 'rxjs';
+import { IconComponent } from '../icon/icon.component';
+import { PageHeadComponent } from '../page-head/page-head.component';
+import { ContactBandComponent } from '../contact-band/contact-band.component';
+import { CONTACT } from '../../brand';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule, TranslatePipe],
+  imports: [TranslatePipe, IconComponent, PageHeadComponent, ContactBandComponent],
   template: `
-    <div class="about-container" [class.rtl]="isRTL">
-      <section class="hero-section">
-        <div class="hero-content">
-          <h1>{{ 'about.title' | translate }}</h1>
-          <p class="hero-subtitle">{{ 'about.subtitle' | translate }}</p>
-        </div>
-      </section>
+    <app-page-head titleKey="about.title" subtitleKey="about.subtitle" />
 
-      <section class="content-section">
-        <div class="container">
-          <div class="about-grid">
-            <div class="about-text">
-              <h2>{{ 'about.ourStory' | translate }}</h2>
-              <p>{{ 'about.description1' | translate }}</p>
-              <p>{{ 'about.description2' | translate }}</p>
-            </div>
-            <div class="about-image">
-              <img src="assets/images/our-team.svg" alt="{{ 'about.ourTeam' | translate }}" class="about-team-img">
-            </div>
-          </div>
-          
-          <div class="features">
-            <div class="feature-item">
-              <div class="feature-icon">🏆</div>
-              <h3>{{ 'about.quality' | translate }}</h3>
-              <p>{{ 'about.qualityDesc' | translate }}</p>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">⚡</div>
-              <h3>{{ 'about.reliability' | translate }}</h3>
-              <p>{{ 'about.reliabilityDesc' | translate }}</p>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">👥</div>
-              <h3>{{ 'about.satisfaction' | translate }}</h3>
-              <p>{{ 'about.satisfactionDesc' | translate }}</p>
-            </div>
-          </div>
+    <section class="section" aria-labelledby="story-title">
+      <div class="container story">
+        <div>
+          <p class="eyebrow">IFixIt Cyprus</p>
+          <h2 id="story-title">{{ 'about.ourStory' | translate }}</h2>
+          <p>{{ 'about.description1' | translate }}</p>
+          <p>{{ 'about.description2' | translate }}</p>
         </div>
-      </section>
+        <aside class="facts on-dark" [attr.aria-label]="'common.contact' | translate">
+          <ul class="facts__list">
+            <li><app-icon name="pin" /> {{ 'common.locationName' | translate }}</li>
+            <li><app-icon name="phone" />
+              <a [href]="contact.phoneHref"><span class="sr-only">{{ 'common.phone' | translate }}: </span>{{ contact.phoneDisplay }}</a></li>
+            <li><app-icon name="mail" />
+              <a [href]="'mailto:' + contact.email"><span class="sr-only">{{ 'common.email' | translate }}: </span>{{ contact.email }}</a></li>
+            <li><app-icon name="clock" />
+              <span><span class="sr-only">{{ 'common.hours' | translate }}: </span>
+                @for (slot of contact.hours; track slot.from) { <span class="facts__slot">{{ slot.from }}–{{ slot.to }}</span> }
+              </span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
 
-      <section class="stats-section">
-        <div class="container">
-          <div class="stats-grid">
-            <div class="stat-item">
-              <div class="stat-number">500+</div>
-              <div class="stat-label">{{ 'about.projects' | translate }}</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">4+</div>
-              <div class="stat-label">{{ 'about.experience' | translate }}</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">98%</div>
-              <div class="stat-label">{{ 'about.satisfaction' | translate }}</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">24/7</div>
-              <div class="stat-label">{{ 'about.support' | translate }}</div>
-            </div>
-          </div>
+    <section class="section section--soft" aria-labelledby="values-title">
+      <div class="container">
+        <div class="section__head">
+          <h2 id="values-title">{{ 'about.valuesTitle' | translate }}</h2>
         </div>
-      </section>
+        <ul class="grid grid--3 plain-list">
+          @for (v of values; track v.key) {
+            <li class="card">
+              <span class="card__icon"><app-icon [name]="v.icon" /></span>
+              <h3>{{ 'about.' + v.key | translate }}</h3>
+              <p>{{ 'about.' + v.key + 'Desc' | translate }}</p>
+            </li>
+          }
+        </ul>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="container">
+        <dl class="stats__grid">
+          @for (s of stats; track s.key) {
+            <div class="stats__item">
+              <dt>{{ 'about.' + s.key | translate }}</dt>
+              <dd>{{ s.value }}</dd>
+            </div>
+          }
+        </dl>
+      </div>
     </div>
+
+    <app-contact-band titleKey="home.ctaTitle" textKey="home.ctaText" />
   `,
   styles: [`
-    .about-container {
-      min-height: 100vh;
-    }
-
-    .hero-section {
-      background: linear-gradient(135deg, #131836, #1a1f4a);
-      color: white;
-      padding: 8rem 0 6rem;
-      text-align: center;
-    }
-
-    .hero-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .hero-section h1 {
-      font-size: 3.5rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-      color: #b69d3f;
-    }
-
-    .hero-subtitle {
-      font-size: 1.3rem;
-      color: #e2e8f0;
-      line-height: 1.6;
-    }
-
-    .content-section {
-      padding: 6rem 0;
-      background: white;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .about-image {
-      width: 100%;
-      height: 400px;
-    }
-
-    .about-team-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-      object-fit: cover;
-
-      &:hover {
-        transform: translateY(-4px);
-      }
-    }
-
-    .placeholder-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      text-align: center;
-      color: white;
-    }
-
-    .team-icon {
-      font-size: 4rem;
-      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
-    }
-
-    .placeholder-text {
-      font-size: 1.1rem;
-      font-weight: 500;
-      opacity: 0.9;
-    }
-
-    .about-text h2 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 2rem;
-      color: #131836;
-    }
-
-    .about-text p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: #64748b;
-      margin-bottom: 1.5rem;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 4rem;
-    }
-
-    .feature-item {
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .feature-item h3 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #131836;
-    }
-
-    .feature-item p {
-      color: #64748b;
-      line-height: 1.6;
-    }
-
-    .stats-section {
-      background: #f8fafc;
-      padding: 5rem 0;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      text-align: center;
-    }
-
-    .stat-item {
-      padding: 2rem 1rem;
-    }
-
-    .stat-number {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #b69d3f;
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-      font-size: 1.1rem;
-      color: #64748b;
-      font-weight: 500;
-    }
-
-    .rtl {
-      direction: rtl;
-      text-align: right;
-    }
-
-    @media (max-width: 768px) {
-      .hero-section h1 {
-        font-size: 2.5rem;
-      }
-      
-      .hero-subtitle {
-        font-size: 1.1rem;
-      }
-      
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-      
-      .about-image {
-        height: 300px;
-      }
-      
-      .about-text h2 {
-        font-size: 2rem;
-      }
-      
-      .features {
-        grid-template-columns: 1fr;
-        margin-top: 3rem;
-      }
-      
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+    .story { display: grid; gap: 2.5rem; align-items: center; }
+    @media (min-width: 900px) { .story { grid-template-columns: 1.1fr .9fr; gap: 4rem; } }
+    .facts { background: var(--navy); color: #fff; padding: 2rem; border-radius: var(--radius); border-bottom: 4px solid var(--gold); }
+    .facts__list { list-style: none; display: grid; gap: 1.1rem; }
+    .facts__list li { display: flex; gap: .8rem; align-items: flex-start; overflow-wrap: anywhere; }
+    .facts__list app-icon { color: var(--gold); font-size: 1.2rem; margin-top: .25rem; flex-shrink: 0; }
+    .facts a { color: #fff; }
+    .facts__slot { display: block; }
+    .plain-list { list-style: none; }
+    .stats { background: var(--surface); padding: 3.5rem 0; border-top: 1px solid var(--line); }
+    .stats__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; margin: 0; }
+    .stats__item { display: flex; flex-direction: column-reverse; justify-content: flex-end; text-align: center; padding: 1rem;
+      border-left: 3px solid var(--gold); }
+    .stats__item dt { font-weight: 500; color: var(--body); }
+    .stats__item dd { margin: 0; font-size: 2.5rem; font-weight: 700; color: var(--navy); line-height: 1.2; }
   `]
 })
-export class AboutComponent implements OnInit, OnDestroy {
-  isRTL = false;
-  private subscription?: Subscription;
-
-  constructor(private translationService: TranslationService) {}
-
-  ngOnInit(): void {
-    this.subscription = this.translationService.currentLanguage$.subscribe(() => {
-      this.isRTL = this.translationService.isRTL();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
-  }
+export class AboutComponent {
+  readonly contact = CONTACT;
+  readonly values = [
+    { key: 'quality', icon: 'quality' },
+    { key: 'reliability', icon: 'clock' },
+    { key: 'satisfaction', icon: 'check' },
+  ];
+  /** Figures carried over from the previous site; to be confirmed by the business. */
+  readonly stats = [
+    { key: 'projects', value: '500+' },
+    { key: 'experience', value: '4+' },
+    { key: 'satisfaction', value: '98%' },
+  ];
 }
