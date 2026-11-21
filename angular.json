@@ -30,6 +30,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
+              "src/favicon.svg",
               "src/assets"
             ],
             "styles": [
@@ -52,7 +53,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/ifixit-cyprus-frontend/"   // 👈 ADD THIS LINE
+              "baseHref": "/ifixit-cyprus-frontend/"
             },
             "development": {
               "optimization": false,
@@ -91,6 +92,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
+              "src/favicon.svg",
               "src/assets"
             ],
             "styles": [
