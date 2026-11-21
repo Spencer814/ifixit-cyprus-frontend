@@ -12,8 +12,6 @@ export class DateFormatService {
    * Format date according to local conventions for each supported language
    * - Greek (Cyprus): DD/MM/YYYY (European format)
    * - English (UK): DD/MM/YYYY (British format)
-   * - Russian: DD.MM.YYYY (Russian format)
-   * - Hebrew: DD/MM/YYYY (Israeli format)
    */
   formatDate(date: Date): string {
     const language = this.translationService.getCurrentLanguage();
@@ -21,12 +19,6 @@ export class DateFormatService {
     switch (language) {
       case 'el': // Greek (Cyprus)
       case 'en': // British English
-      // case 'he': // Hebrew (Israel)
-      //   return this.formatEuropeanStyle(date);
-
-      // case 'ru': // Russian
-      //   return this.formatRussianStyle(date);
-
       default:
         return this.formatEuropeanStyle(date);
     }
@@ -34,8 +26,7 @@ export class DateFormatService {
 
   /**
    * Format time according to local conventions
-   * - Greek/English/Hebrew: 24-hour format
-   * - Russian: 24-hour format
+   * - Greek/English: 24-hour format
    */
   formatTime(date: Date): string {
     const language = this.translationService.getCurrentLanguage();
@@ -74,9 +65,6 @@ export class DateFormatService {
       let parts: string[];
 
       switch (language) {
-        // case 'ru':
-        //   parts = dateString.split('.');
-        //   break;
         default:
           parts = dateString.split('/');
           break;
@@ -115,14 +103,6 @@ export class DateFormatService {
       en: [
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
-      // ],
-      // ru: [
-      //   'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-      //   'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
-      // ],
-      // he: [
-      //   'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני',
-      //   'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'
       ]
     };
 
@@ -138,8 +118,6 @@ export class DateFormatService {
     const dayNames: Record<SupportedLanguage, string[]> = {
       el: ['Κυριακή', 'Δευτέρα', 'Τρίτη', 'Τετάρτη', 'Πέμπτη', 'Παρασκευή', 'Σάββατο'],
       en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      // ru: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-      // he: ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת']
     };
 
     return dayNames[language] || dayNames.en;
@@ -152,19 +130,10 @@ export class DateFormatService {
     return `${day}/${month}/${year}`;
   }
 
-  // private formatRussianStyle(date: Date): string {
-  //   const day = String(date.getDate()).padStart(2, '0');
-  //   const month = String(date.getMonth() + 1).padStart(2, '0');
-  //   const year = date.getFullYear();
-  //   return `${day}.${month}.${year}`;
-  // }
-
   private getLocaleCode(language: SupportedLanguage): string {
     const localeCodes: Record<SupportedLanguage, string> = {
       el: 'el-CY', // Greek (Cyprus)
       en: 'en-GB', // British English
-      // ru: 'ru-RU', // Russian
-      // he: 'he-IL'  // Hebrew (Israel)
     };
 
     return localeCodes[language] || 'en-GB';
