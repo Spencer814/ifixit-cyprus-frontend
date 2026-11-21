@@ -1,5 +1,6 @@
 /* IFixIt Cyprus — global design system.
- * Palette follows NEA Contractors (navy + gold, Poppins). Gold #b69d3f only
+ * Palette follows NEA Contractors (navy + gold). Font is Manrope, not NEA's Poppins:
+ * Poppins has no Greek glyphs and Greek is the default language. Gold #b69d3f only
  * passes contrast on navy (6.5:1); on white use --gold-ink (5.7:1). */
 
 :root {
@@ -17,7 +18,7 @@
   --focus: var(--navy);
   --radius: 4px;
   --container: 1200px;
-  --font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif;
+  --font: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -34,7 +35,7 @@ body {
   overflow-wrap: break-word;
 }
 
-h1, h2, h3, h4 { color: var(--ink); line-height: 1.25; margin: 0 0 .75rem; font-weight: 600; }
+h1, h2, h3, h4 { color: var(--ink); line-height: 1.25; margin: 0 0 .75rem; font-weight: 700; letter-spacing: -.01em; }
 p { margin: 0 0 1rem; }
 img, svg { max-width: 100%; }
 a { color: var(--navy); }
