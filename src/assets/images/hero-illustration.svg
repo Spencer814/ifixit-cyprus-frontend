@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640" preserveAspectRatio="xMidYMid slice">
+  <!-- Placeholder art for the home hero (brand colours, no photo rights needed).
+       Swap for a real photo via HERO_IMAGE in src/app/brand.ts. -->
+  <defs>
+    <pattern id="grid-s" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0H0V20" fill="none" stroke="#131836" stroke-opacity=".06" stroke-width="1"/>
+    </pattern>
+    <pattern id="grid-l" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="url(#grid-s)"/>
+      <path d="M100 0H0V100" fill="none" stroke="#131836" stroke-opacity=".12" stroke-width="1.2"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="640" fill="#f4efdf"/>
+  <rect width="800" height="640" fill="url(#grid-l)"/>
+
+  <!-- ground line -->
+  <path d="M90 520H710" stroke="#131836" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- house -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M190 520V300L400 150L610 300V520" stroke="#131836" stroke-width="10"/>
+    <path d="M150 320L400 130L650 320" stroke="#b69d3f" stroke-width="14"/>
+    <path d="M520 198V150h50v86" stroke="#131836" stroke-width="8"/>
+    <rect x="350" y="400" width="100" height="120" stroke="#131836" stroke-width="8"/>
+    <circle cx="430" cy="465" r="5" fill="#131836" stroke="none"/>
+    <rect x="240" y="350" width="80" height="80" stroke="#131836" stroke-width="8"/>
+    <path d="M280 350v80M240 390h80" stroke="#131836" stroke-width="5"/>
+    <rect x="480" y="350" width="80" height="80" stroke="#131836" stroke-width="8"/>
+    <path d="M520 350v80M480 390h80" stroke="#131836" stroke-width="5"/>
+  </g>
+
+  <!-- dimension line -->
+  <g stroke="#b69d3f" stroke-width="3" fill="none">
+    <path d="M190 570H610" stroke-dasharray="10 8"/>
+    <path d="M190 556v28M610 556v28"/>
+  </g>
+  <g stroke="#131836" stroke-width="2" stroke-opacity=".35">
+    <path d="M660 300v220M650 300h20M650 520h20"/>
+  </g>
+
+  <!-- wrench -->
+  <g transform="translate(615 175) rotate(40)">
+    <path d="M-12 0h24v170a12 12 0 0 1-24 0z" fill="#131836"/>
+    <path d="M-38 -38a44 44 0 1 0 76 0l-20 20h-36z" fill="#131836"/>
+    <path d="M-16 -64h32v40h-32z" fill="#f4efdf"/>
+  </g>
+
+  <!-- paint roller -->
+  <g transform="translate(140 150) rotate(-18)">
+    <rect x="-70" y="-26" width="140" height="52" rx="10" fill="#b69d3f"/>
+    <path d="M70 0h22v58H0v40" fill="none" stroke="#131836" stroke-width="9" stroke-linejoin="round"/>
+    <rect x="-12" y="96" width="24" height="70" rx="8" fill="#131836"/>
+  </g>
+</svg>
